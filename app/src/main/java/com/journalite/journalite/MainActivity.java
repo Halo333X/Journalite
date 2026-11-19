@@ -1,3 +1,9 @@
+/*
+* Integrantes de equipo:
+*   - Alina Valeria Franco Gutiérrez
+*   - Gael Orian Acevedo Miralles
+*   - Paola Castillo Pérez
+ */
 package com.journalite.journalite;
 
 import android.os.Bundle;
