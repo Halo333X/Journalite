@@ -1,6 +1,6 @@
 # Jorunalite
 Diario de Tareas y Evidencias Fotográficas
-<img src="./logo.svg" width="50px">
+<img src="./logo.svg" width="50%">
 
 ### Integrantes de equipo
 
