@@ -23,6 +23,7 @@ public class SplashActivity extends AppCompatActivity {
                     Intent openMainWindow = new Intent();
                     openMainWindow.setClassName("com.journalite.journalite", "com.journalite.journalite.MainActivity");
                     startActivity(openMainWindow);
+                    finish();
                 }
             }
         };
