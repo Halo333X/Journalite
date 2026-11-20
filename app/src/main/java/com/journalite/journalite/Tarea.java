@@ -64,4 +64,8 @@ public class Tarea {
     public String getExifFecha() {
         return this.exifFecha;
     }
+
+    public int getIdTarea() {
+        return this.idTarea;
+    }
 }
