@@ -1,4 +1,4 @@
-# Jorunalite
+# Journalite
 #### Diario de Tareas y Evidencias Fotográficas
 <img src="./logo.png" width="50%">
 
@@ -8,7 +8,30 @@
 - Gael Orian Acevedo Miralles
 - Paola Castillo Pérez
 
-### Documentos
+**Materia:** Programación de Dispositivos Móviles  
+**Lenguaje / Plataforma:** Java — Android Studio (SDK 26+)
+
+### Descripción del Proyecto
+**Journalite** es una aplicación móvil nativa para Android diseñada con un enfoque autodidacta para estudiantes universitarios. A diferencia de las plataformas institucionales formales (como Canvas), Journalite ayuda a gestionar repasos personales, metas de estudio y apuntes fotografiados en clase organizados por **materia**, evitando que se pierdan en la galería general del teléfono.
+
+Como regla principal de negocio, **ninguna tarea puede marcarse como completada sin antes capturar una fotografía real como evidencia**, certificando la fecha y hora de estudio mediante metadatos EXIF y confirmando la acción con retroalimentación háptica.
+
+---
+
+### Funcionalidades y Tecnologías Móviles Integradas
+- **Persistencia Local (SQLite):** Almacenamiento estructurado y 100% offline mediante `SQLiteOpenHelper` (`journalite.db`), con consultas filtradas dinámicamente por materia y estado (`PENDIENTE` / `COMPLETADA`).
+- **Cámara Nativa y Almacenamiento Seguro (`FileProvider`):** Captura directa de evidencia fotográfica guardada en el directorio privado de la aplicación.
+- **Interpretación de Metadatos (`ExifInterface`):** Extracción automática de la fecha y hora exacta de captura (`TAG_DATETIME`) para validar la autenticidad de la evidencia.
+- **Notificaciones Programadas (`AlarmManager` + `NotificationCompat`):** Recordatorios locales en fecha y hora específica para el repaso de apuntes por materia.
+- **Retroalimentación Háptica (`Vibrator`):** Confirmación física mediante vibración corta al registrar exitosamente una evidencia.
+
+---
+
+### Estructura del Repositorio
+- `app/` — Código fuente completo en Java, layouts XML y recursos de Android Studio.
+- `Documentacion/` — Entregables en formato PDF, script fuente de la base de datos (`journalite_db.sql`) y capturas de pantalla / diagramas.
+
+### Link de Documentos
 
 - Modelo de base de datos: https://docs.google.com/document/d/1NdfaklhSnLf6QGdEKMffGmvt-6i2Wvv4ryUd4UJSz78/edit?usp=sharing
 - Documento de requerimientos: https://docs.google.com/document/d/1oiLijUn2eX258Dmev_APnWs05JZKa2Zxhb9ouFbIxSc/edit?tab=t.0
