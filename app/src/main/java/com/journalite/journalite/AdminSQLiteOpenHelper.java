@@ -13,49 +13,49 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE tareas (" +
-                "id_tarea INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "titulo TEXT NOT NULL, " +
-                "materia TEXT NOT NULL, " +
-                "descripcion TEXT, " +
-                "fecha_repaso TEXT NOT NULL, " +
-                "notificacion_activa INTEGER DEFAULT 0, " +
-                "estado TEXT NOT NULL DEFAULT 'PENDIENTE', " +
-                "ruta_foto TEXT, " +
-                "exif_fecha TEXT" +
+        db.execSQL("CREATE TABLE homeworks (" +
+                "homework_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "title TEXT NOT NULL, " +
+                "subject TEXT NOT NULL, " +
+                "description TEXT, " +
+                "review_date TEXT NOT NULL, " +
+                "has_notifications INTEGER DEFAULT 0, " +
+                "status TEXT NOT NULL DEFAULT '" + HomeWork.STATUS_PENDING + "', " +
+                "photo_path TEXT, " +
+                "photo_date TEXT" +
                 ")");
-        db.execSQL("CREATE INDEX idx_tareas_materia ON tareas(materia)");
-        db.execSQL("CREATE INDEX idx_tareas_estado ON tareas(estado)");
+        db.execSQL("CREATE INDEX idx_homeworks_subject ON HomeWorks(subject)");
+        db.execSQL("CREATE INDEX idx_homeworks_status ON HomeWorks(status)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS tareas");
+        db.execSQL("DROP TABLE IF EXISTS homeworks");
         onCreate(db);
     }
 
-    public long insertarTarea(Tarea tarea) {
+    public long insertHomeWork(HomeWork homeWork) {
         SQLiteDatabase db = getWritableDatabase();
-        ContentValues valores = new ContentValues();
-        valores.put("titulo", tarea.getTitulo());
-        valores.put("materia", tarea.getMateria());
-        valores.put("descripcion", tarea.getDescripcion());
-        valores.put("fecha_repaso", tarea.getFechaRepaso());
-        valores.put("notificacion_activa", tarea.isNotificacionesActivas() ? 1 : 0);
-        valores.put("estado", "PENDIENTE");
+        ContentValues values = new ContentValues();
+        values.put("title", homeWork.getTitle());
+        values.put("subject", homeWork.getSubject());
+        values.put("description", homeWork.getDescription());
+        values.put("review_date", homeWork.getReviewDate());
+        values.put("has_notifications", homeWork.hasNotifications() ? 1 : 0);
+        values.put("status", HomeWork.STATUS_PENDING);
 
-        long id = db.insert("tareas", null, valores);
+        long id = db.insert("HomeWorks", null, values);
         return id;
     }
 
-    public Tarea obtenerTarea(int id) {
+    public HomeWork getHomeWork(int id) {
         SQLiteDatabase db = getReadableDatabase();
-        Tarea tarea = null;
-        String[] columnas = {"id_tarea", "titulo", "materia", "descripcion", "fecha_repaso", "notificacion_activa", "estado", "ruta_foto", "exif_fecha"};
-        String[] parametros = {String.valueOf(id)};
-        Cursor cursor = db.query("tareas", columnas, "id_tarea = ?", parametros, null, null, null);
+        HomeWork homeWork = null;
+        String[] columns = {"homework_id", "title", "subject", "description", "review_date", "has_notifications", "status", "photo_path", "photo_date"};
+        String[] params = {String.valueOf(id)};
+        Cursor cursor = db.query("homeworks", columns, "homework_id = ?", params, null, null, null);
         if (cursor.moveToFirst()) {
-            tarea = new Tarea(
+            homeWork = new HomeWork(
                     cursor.getInt(0),
                     cursor.getString(1),
                     cursor.getString(2),
@@ -68,20 +68,20 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
             );
         }
         cursor.close();
-        return tarea;
+        return homeWork;
     }
 
-    public int actualizarEvidencia(int id, String rutaFoto, String exifFecha) {
+    public int updateEvidence(int id, String photoPath, String photoDate) {
         SQLiteDatabase db = getWritableDatabase();
-        ContentValues valores = new ContentValues();
-        valores.put("ruta_foto", rutaFoto);
-        valores.put("exif_fecha", exifFecha);
-        valores.put("estado", "COMPLETADA");
-        return db.update("tareas", valores, "id_tarea = ?", new String[]{String.valueOf(id)});
+        ContentValues values = new ContentValues();
+        values.put("photo_path", photoPath);
+        values.put("photo_date", photoDate);
+        values.put("status", HomeWork.STATUS_COMPLETED);
+        return db.update("homeworks", values, "homework_id = ?", new String[]{String.valueOf(id)});
     }
 
-    public int eliminarTarea(int id) {
+    public int deleteHomeWork(int id) {
         SQLiteDatabase db = getWritableDatabase();
-        return db.delete("tareas", "id_tarea = ?", new String[]{String.valueOf(id)});
+        return db.delete("homeworks", "homework_id = ?", new String[]{String.valueOf(id)});
     }
 }
