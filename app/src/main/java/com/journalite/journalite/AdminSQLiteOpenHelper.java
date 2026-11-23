@@ -1,3 +1,4 @@
+// Hecho por Gael
 package com.journalite.journalite;
 
 import android.content.ContentValues;
@@ -5,6 +6,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     public AdminSQLiteOpenHelper(Context context) {
@@ -83,5 +87,19 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     public int deleteHomeWork(int id) {
         SQLiteDatabase db = getWritableDatabase();
         return db.delete("homeworks", "homework_id = ?", new String[]{String.valueOf(id)});
+    }
+
+    public List<String> getSubjects() {
+        SQLiteDatabase db = getReadableDatabase();
+        List<String> subjects = new ArrayList<>();
+        Cursor cursor = db.rawQuery("SELECT DISTINCT subject FROM homeworks ORDER BY subject ASC", null);
+        while (cursor.moveToNext()) {
+            String subject = cursor.getString(0);
+            if (subject != null && !subject.trim().isEmpty()) {
+                subjects.add(subject.trim());
+            }
+        }
+        cursor.close();
+        return subjects;
     }
 }

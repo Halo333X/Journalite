@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -32,13 +33,13 @@
 
         <!-- Pantalla 2: Nueva Meta Autodidacta -->
         <activity
-            android:name=".AgregarTareaActivity"
+            android:name=".AddHomeWorkActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
         <!-- Receptor de Notificaciones de Repaso -->
         <receiver
-            android:name=".RecordatorioReceiver"
+            android:name=".ReminderReceiver"
             android:enabled="true"
             android:exported="false" />
 

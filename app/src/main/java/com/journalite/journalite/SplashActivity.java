@@ -1,7 +1,7 @@
+// Hecho por Gael
 package com.journalite.journalite;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,17 +21,12 @@ public class SplashActivity extends AppCompatActivity {
                     e.printStackTrace();
                 } finally {
                     Intent openMainWindow = new Intent();
-                    openMainWindow.setClassName("com.journalite.journalite", "com.journalite.journalite.MainActivity");
+                    openMainWindow.setClassName("com.journalite.journalite", "com.journalite.journalite.AddHomeWorkActivity");
                     startActivity(openMainWindow);
                     finish();
                 }
             }
         };
         timer.start();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
 }

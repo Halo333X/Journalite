@@ -1,3 +1,4 @@
+// Hecho por Alina
 package com.journalite.journalite;
 
 import android.app.NotificationChannel;
@@ -13,37 +14,37 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-public class RecordatorioReceiver extends BroadcastReceiver {
+public class ReminderReceiver extends BroadcastReceiver {
 
     private static final String CHANNEL_ID = "journalite_recordatorios";
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        int idTarea = intent.getIntExtra("id_tarea", 1);
-        String titulo = intent.getStringExtra("titulo");
-        String materia = intent.getStringExtra("materia");
+        int homeWorkId = intent.getIntExtra(Constants.EXTRA_HOMEWORK_ID, 1);
+        String title = intent.getStringExtra(Constants.EXTRA_TITLE);
+        String subject = intent.getStringExtra(Constants.EXTRA_SUBJECT);
 
-        if (titulo == null) titulo = "Repaso pendiente";
-        if (materia == null) materia = "Estudio autodidacta";
+        if (title == null) title = context.getString(R.string.reminder_default_title);
+        if (subject == null) subject = context.getString(R.string.reminder_default_subject);
 
-        crearCanalNotificacion(context);
+        createReminderChannel(context);
 
-        // Al tocar la notificación abre la app
+        // Tapping the notification opens the app
         Intent openIntent = new Intent(context, MainActivity.class);
         openIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(
                 context,
-                idTarea,
+                homeWorkId,
                 openIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(android.R.drawable.ic_popup_reminder)
-                .setContentTitle("Recordatorio de " + materia)
-                .setContentText("Es hora de repasar: " + titulo)
+                .setContentTitle(context.getString(R.string.reminder_title, subject))
+                .setContentText(context.getString(R.string.reminder_text, title))
                 .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText("Es hora de repasar: " + titulo + ". Toma foto de tu evidencia al terminar."))
+                        .bigText(context.getString(R.string.reminder_big_text, title)))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
@@ -56,13 +57,13 @@ public class RecordatorioReceiver extends BroadcastReceiver {
         }
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-        notificationManager.notify(idTarea, builder.build());
+        notificationManager.notify(homeWorkId, builder.build());
     }
 
-    private void crearCanalNotificacion(Context context) {
+    private void createReminderChannel(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Recordatorios Journalite";
-            String description = "Notificaciones para repasar apuntes y metas";
+            CharSequence name = context.getString(R.string.reminder_channel_name);
+            String description = context.getString(R.string.reminder_channel_description);
             int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
