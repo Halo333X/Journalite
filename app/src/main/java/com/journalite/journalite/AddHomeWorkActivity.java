@@ -1,4 +1,3 @@
-// Hecho por Alina
 package com.journalite.journalite;
 
 import android.Manifest;
@@ -14,15 +13,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -43,26 +46,34 @@ public class AddHomeWorkActivity extends AppCompatActivity {
     private AutoCompleteTextView actvSubject;
     private SwitchMaterial switchReminder;
     private LinearLayout layoutReminderTime;
-    private Button btnSelectTime, btnSaveHomeWork;
+    private MaterialButton btnSelectTime, btnSaveHomeWork;
 
     private AdminSQLiteOpenHelper dbHelper;
     private Calendar selectedCalendar;
+    private boolean dateSelected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        WindowCompat.enableEdgeToEdge(getWindow());
         setContentView(R.layout.activity_agregar_tarea);
+
+        // Evita que la barra superior choque con la hora y batería del teléfono
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.mainAgregar), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
         dbHelper = new AdminSQLiteOpenHelper(this);
         selectedCalendar = Calendar.getInstance();
-        selectedCalendar.add(Calendar.HOUR_OF_DAY, 1);
+        selectedCalendar.set(Calendar.HOUR_OF_DAY, 10);
         selectedCalendar.set(Calendar.MINUTE, 0);
         selectedCalendar.set(Calendar.SECOND, 0);
 
         bindViews();
         setupSubjectSuggestions();
         setupDateTimePickers();
-        requestNotificationPermissionIfNeeded();
 
         btnSaveHomeWork.setOnClickListener(v -> saveHomeWork());
     }
@@ -80,11 +91,15 @@ public class AddHomeWorkActivity extends AppCompatActivity {
         btnSelectTime = findViewById(R.id.btnSeleccionarHora);
         btnSaveHomeWork = findViewById(R.id.btnGuardarTarea);
 
-        updateDateText();
         updateTimeText();
 
-        switchReminder.setOnCheckedChangeListener((buttonView, isChecked) ->
-                layoutReminderTime.setVisibility(isChecked ? View.VISIBLE : View.GONE));
+        // Al activar el switch muestra el selector de hora y pide permiso si es Android 13+
+        switchReminder.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            layoutReminderTime.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+            if (isChecked) {
+                requestNotificationPermissionIfNeeded();
+            }
+        });
     }
 
     private void setupSubjectSuggestions() {
@@ -112,6 +127,7 @@ public class AddHomeWorkActivity extends AppCompatActivity {
                 selectedCalendar.set(Calendar.YEAR, year);
                 selectedCalendar.set(Calendar.MONTH, month);
                 selectedCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                dateSelected = true;
                 updateDateText();
             }, initialYear, initialMonth, initialDay);
 
@@ -166,6 +182,10 @@ public class AddHomeWorkActivity extends AppCompatActivity {
         if (subject.isEmpty()) {
             actvSubject.setError(getString(R.string.error_subject_required));
             actvSubject.requestFocus();
+            return;
+        }
+        if (!dateSelected) {
+            Toast.makeText(this, "Seleccione una fecha para la tarea", Toast.LENGTH_SHORT).show();
             return;
         }
 
