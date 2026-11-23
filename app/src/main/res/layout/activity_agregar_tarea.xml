@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainAgregar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F7F8"
+    android:background="#EFEFEF"
     android:orientation="vertical">
 
-    <!-- Barra Superior -->
+    <!-- Barra Superior con tono original #265C63 -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbarAgregar"
         android:layout_width="match_parent"
@@ -14,7 +15,7 @@
         android:background="#265C63"
         app:navigationIcon="@android:drawable/ic_menu_revert"
         app:navigationIconTint="@color/white"
-        app:title="Nueva Meta Autodidacta"
+        app:title="Nueva meta autodidacta"
         app:titleTextColor="@color/white" />
 
     <ScrollView
@@ -29,106 +30,161 @@
             android:padding="20dp">
 
             <!-- 1. Título de la tarea -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="Título de la tarea"
+                android:textColor="#222222"
+                android:textSize="14sp" />
+
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="14dp"
-                android:hint="@string/title_hint"
-                android:textColorHint="#00FFFFFF">
+                app:boxBackgroundColor="#EAEAEA"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp"
+                app:boxStrokeColor="#555555"
+                app:boxStrokeWidth="1dp"
+                app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etTitulo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:hint="@string/error_title_required"
+                    android:hint="Escriba el título de la tarea"
                     android:inputType="textCapSentences"
                     android:maxLines="1"
-                    android:textColor="#000000"
-                    android:textColorHint="#666666" />
+                    android:textColor="#222222"
+                    android:textColorHint="#888888" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- 2. Materia con autocompletado -->
+            <!-- 2. Materia -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="Materia"
+                android:textColor="#222222"
+                android:textSize="14sp" />
+
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="14dp"
-                android:hint="@string/subject_hint"
-                android:textColorHint="#00FFFFFF">
+                app:boxBackgroundColor="#EAEAEA"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp"
+                app:boxStrokeColor="#555555"
+                app:boxStrokeWidth="1dp"
+                app:endIconTint="#222222"
+                app:hintEnabled="false">
 
                 <AutoCompleteTextView
                     android:id="@+id/actvMateria"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:backgroundTint="#FFFFFF"
-                    android:hint="@string/error_subject_required"
+                    android:hint="Elija o escriba una materia"
                     android:inputType="textCapWords"
                     android:maxLines="1"
-                    android:popupBackground="#717171"
-                    android:textColor="#000000"
-                    android:textColorHighlight="#000000"
-                    android:textColorHint="#666666"
-                    android:textColorLink="#757575" />
+                    android:popupBackground="#FFFFFF"
+                    android:textColor="#222222"
+                    android:textColorHint="#888888" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- 3. Descripción breve -->
+            <!-- 3. Descripción -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="Descripción"
+                android:textColor="#222222"
+                android:textSize="14sp" />
+
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="14dp"
-                android:hint="@string/description_hint"
-                android:textColorHint="#00FFFFFF">
+                app:boxBackgroundColor="#EAEAEA"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp"
+                app:boxStrokeColor="#555555"
+                app:boxStrokeWidth="1dp"
+                app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etDescripcion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
                     android:gravity="top"
-                    android:hint="@string/error_description_optional"
+                    android:hint="Describa su tarea"
                     android:inputType="textMultiLine|textCapSentences"
-                    android:minLines="3"
-                    android:textColor="#000000"
-                    android:textColorHint="#666666" />
+                    android:minLines="2"
+                    android:textColor="#222222"
+                    android:textColorHint="#888888" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- 4. Fecha Objetivo -->
+            <!-- 4. Fecha -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="Fecha"
+                android:textColor="#222222"
+                android:textSize="14sp" />
+
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:hint="Fecha objetivo de repaso *"
-                app:startIconDrawable="@android:drawable/ic_menu_my_calendar"
-                app:startIconTint="#4D4D4D">
+                android:layout_marginBottom="18dp"
+                app:boxBackgroundColor="#EAEAEA"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp"
+                app:boxStrokeColor="#555555"
+                app:boxStrokeWidth="1dp"
+                app:endIconDrawable="@android:drawable/ic_menu_my_calendar"
+                app:endIconMode="custom"
+                app:endIconTint="#222222"
+                app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etFecha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
                     android:clickable="true"
                     android:focusable="false"
+                    android:hint="Seleccione la fecha"
                     android:inputType="none"
-                    android:textColor="#000000" />
+                    android:textColor="#222222"
+                    android:textColorHint="#888888" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- 5. Interruptor de Notificación y Hora -->
-            <androidx.cardview.widget.CardView
+            <!-- 5. Tarjeta de Notificación con variante suave del tono #265C63 -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="2dp">
+                app:cardBackgroundColor="#C5D9DC"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
                     android:orientation="vertical"
                     android:padding="14dp">
 
@@ -136,76 +192,78 @@
                         android:id="@+id/switchNotificacion"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:checked="true"
+                        android:checked="false"
                         android:text="Activar notificación de repaso"
-                        android:textColor="#000000"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:textColor="#111111"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:thumbTint="#FFFFFF"
+                        app:trackTint="#265C63" />
 
+                    <!-- Cajita desplegable de hora (visible al activar el switch) -->
                     <LinearLayout
                         android:id="@+id/layoutHoraRecordatorio"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Hora del recordatorio:"
-                            android:textColor="#555555" />
-
-                        <Button
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnSeleccionarHora"
                             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="09:00 AM"
-                            android:textColor="#265C63" />
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:gravity="start|center_vertical"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:text="10:00 AM"
+                            android:textAllCaps="false"
+                            android:textColor="#222222"
+                            android:textSize="16sp"
+                            app:backgroundTint="#EAEAEA"
+                            app:cornerRadius="8dp"
+                            app:icon="@android:drawable/arrow_down_float"
+                            app:iconGravity="end"
+                            app:iconTint="#222222"
+                            app:strokeColor="#555555"
+                            app:strokeWidth="1dp" />
                     </LinearLayout>
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <!-- 6. Aviso informativo de evidencia obligatoria -->
-            <LinearLayout
+            <!-- 6. Aviso informativo gris -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="#E3ECEE"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="12dp">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginEnd="10dp"
-                    android:contentDescription="Cámara"
-                    android:src="@android:drawable/ic_menu_camera"
-                    app:tint="#265C63" />
+                android:layout_marginBottom="22dp"
+                app:cardBackgroundColor="#DCDEDE"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Nota: Esta tarea solo podrá marcarse como completada capturando una fotografía de evidencia."
-                    android:textColor="#1F4A50"
-                    android:textSize="13sp" />
-            </LinearLayout>
+                    android:padding="12dp"
+                    android:text="Nota: Esta tarea solo podrá marcarse como completada tomando una fotografía de evidencia."
+                    android:textColor="#222222"
+                    android:textSize="13sp"
+                    android:textStyle="italic" />
+            </com.google.android.material.card.MaterialCardView>
 
-            <!-- 7. Botón Guardar -->
-            <Button
+            <!-- 7. Botón Guardar tipo píldora con tono original #265C63 -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnGuardarTarea"
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
-                android:backgroundTint="#265C63"
-                android:text="Guardar Tarea"
+                android:layout_height="56dp"
+                android:text="Guardar tarea"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:backgroundTint="#265C63"
+                app:cornerRadius="28dp" />
 
         </LinearLayout>
     </ScrollView>
