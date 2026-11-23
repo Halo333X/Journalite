@@ -12,24 +12,28 @@
 **Lenguaje / Plataforma:** Java — Android Studio (SDK 26+)
 
 ### Descripción del proyecto
-**Journalite** es una aplicación móvil para Android diseñada con un enfoque autodidacta para estudiantes universitarios. A diferencia de las plataformas institucionales formales, como Canvas, Journalite ayuda a gestionar repasos personales, metas de estudio y apuntes fotografiados en clase organizados por materia, evitando que se pierdan en la galería general del teléfono.
+**Journalite** es una aplicación móvil para Android pensada para estudiantes universitarios que quieren organizar mejor sus actividades de estudio por cuenta propia. A diferencia de plataformas como Canvas, que se utilizan principalmente para revisar tareas y entregas de los profesores, Journalite permite llevar un registro de repasos, metas personales y apuntes fotografiados en clase, organizados por materia para que no se pierdan entre las demás fotos del celular.
 
-Como regla principal de negocio, ninguna tarea puede marcarse como completada sin antes capturar una fotografía real como evidencia, certificando la fecha y hora de estudio mediante metadatos EXIF y confirmando la acción con retroalimentación háptica.
+Una de las características principales de la aplicación es que no permite marcar una tarea como completada sin antes tomar una fotografía como evidencia. Además, utiliza los metadatos EXIF de la imagen para obtener la fecha y hora en que fue tomada, y confirma que la evidencia se guardó correctamente mediante una vibración corta del dispositivo.
 
 ---
 
 ### Funcionalidades y tecnologías móviles integradas
-- **Persistencia local (SQLite):** Almacenamiento estructurado y 100% offline mediante `SQLiteOpenHelper` (`journalite.db`), con consultas filtradas dinámicamente por materia y estado (`PENDIENTE` / `COMPLETADA`).
-- **Cámara y almacenamiento(`FileProvider`):** Captura directa de evidencia fotográfica guardada en el directorio privado de la aplicación.
-- **Interpretación de metadatos (`ExifInterface`):** Extracción automática de la fecha y hora exacta de captura (`TAG_DATETIME`) para validar la autenticidad de la evidencia.
-- **Notificaciones programadas (`AlarmManager` + `NotificationCompat`):** Recordatorios locales en fecha y hora específica para el repaso de apuntes por materia.
-- **Confirmación por vibración (`Vibrator`):** Confirmación física mediante vibración corta al registrar exitosamente una evidencia.
+-**Almacenamiento local (SQLite):** La información se guarda directamente en el dispositivo, por lo que la aplicación puede utilizarse sin conexión a internet. Se utiliza SQLiteOpenHelper para administrar la base de datos journalite.db, donde se pueden consultar las tareas y filtrarlas por materia o estado (PENDIENTE / COMPLETADA).
+
+-**Cámara y almacenamiento:** Permite tomar fotografías desde la aplicación y guardar las evidencias en una carpeta propia de Journalite.
+
+-**Lectura de metadatos:** Obtiene automáticamente la fecha y hora de captura de la fotografía mediante TAG_DATETIME.
+
+-**Recordatorios:** Permite programar notificaciones para recordar al estudiante cuándo debe repasar sus apuntes o realizar alguna actividad.
+
+-**Confirmación por vibración:** El dispositivo emite una vibración corta cuando la evidencia se registra correctamente.
 
 ---
 
 ### Estructura del repositorio
-- `app/` — Código fuente completo en Java, layouts XML y recursos de Android Studio.
-- `Documentacion/` — Entregables en formato PDF, script fuente de la base de datos (`journalite_db.sql`) y capturas de pantalla / diagramas.
+- `app/` — Contiene el código fuente desarrollado en Java, los archivos XML de las pantallas y los recursos utilizados en Android Studio.
+- `Documentacion/` — Incluye los documentos en PDF, el script de la base de datos (journalite_db.sql) y las capturas de pantalla y diagramas del proyecto.
 
 ### Link de documentos
 
