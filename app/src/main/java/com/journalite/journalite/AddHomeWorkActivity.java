@@ -55,7 +55,6 @@ public class AddHomeWorkActivity extends AppCompatActivity {
 
         dbHelper = new AdminSQLiteOpenHelper(this);
         selectedCalendar = Calendar.getInstance();
-        // Default suggestion: one hour from now, on the hour
         selectedCalendar.add(Calendar.HOUR_OF_DAY, 1);
         selectedCalendar.set(Calendar.MINUTE, 0);
         selectedCalendar.set(Calendar.SECOND, 0);
@@ -89,7 +88,6 @@ public class AddHomeWorkActivity extends AppCompatActivity {
     }
 
     private void setupSubjectSuggestions() {
-        // Default suggested subjects + subjects the user already saved before in SQLite
         Set<String> uniqueSubjects = new LinkedHashSet<>(Arrays.asList(
                 "Programación", "Cálculo", "Física", "Inglés", "Bases de Datos", "General"
         ));
@@ -171,13 +169,11 @@ public class AddHomeWorkActivity extends AppCompatActivity {
             return;
         }
 
-        // If the reminder is on, the chosen date and time must be in the future
         if (reminderEnabled && selectedCalendar.getTimeInMillis() <= System.currentTimeMillis()) {
             Toast.makeText(this, R.string.error_past_time, Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Date and time are saved together in ISO format (yyyy-MM-ddTHH:mm:ss)
         String reviewDate = new SimpleDateFormat(Constants.DATE_FORMAT_ISO, Locale.US)
                 .format(selectedCalendar.getTime());
 
@@ -200,7 +196,7 @@ public class AddHomeWorkActivity extends AppCompatActivity {
                 scheduleReminder((int) generatedId, title, subject);
             }
             Toast.makeText(this, R.string.homework_saved, Toast.LENGTH_SHORT).show();
-            finish(); // Goes back to the previous screen
+            finish();
         } else {
             Toast.makeText(this, R.string.error_saving, Toast.LENGTH_SHORT).show();
         }

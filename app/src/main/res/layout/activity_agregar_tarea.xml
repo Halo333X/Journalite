@@ -34,14 +34,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="14dp"
-                android:hint="Título de la tarea o repaso *">
+                android:hint="@string/title_hint"
+                android:textColorHint="#00FFFFFF">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etTitulo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:hint="@string/error_title_required"
                     android:inputType="textCapSentences"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:textColor="#000000"
+                    android:textColorHint="#666666" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- 2. Materia con autocompletado -->
@@ -50,14 +55,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="14dp"
-                android:hint="Selecciona o escribe tu materia *">
+                android:hint="@string/subject_hint"
+                android:textColorHint="#00FFFFFF">
 
                 <AutoCompleteTextView
                     android:id="@+id/actvMateria"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:backgroundTint="#FFFFFF"
+                    android:hint="@string/error_subject_required"
                     android:inputType="textCapWords"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:popupBackground="#717171"
+                    android:textColor="#000000"
+                    android:textColorHighlight="#000000"
+                    android:textColorHint="#666666"
+                    android:textColorLink="#757575" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- 3. Descripción breve -->
@@ -66,15 +80,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="14dp"
-                android:hint="Descripción breve (temas, páginas, ejercicios)">
+                android:hint="@string/description_hint"
+                android:textColorHint="#00FFFFFF">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etDescripcion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
                     android:gravity="top"
+                    android:hint="@string/error_description_optional"
                     android:inputType="textMultiLine|textCapSentences"
-                    android:minLines="3" />
+                    android:minLines="3"
+                    android:textColor="#000000"
+                    android:textColorHint="#666666" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- 4. Fecha Objetivo -->
@@ -84,15 +103,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:hint="Fecha objetivo de repaso *"
-                app:startIconDrawable="@android:drawable/ic_menu_my_calendar">
+                app:startIconDrawable="@android:drawable/ic_menu_my_calendar"
+                app:startIconTint="#4D4D4D">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etFecha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
                     android:clickable="true"
                     android:focusable="false"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:textColor="#000000" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- 5. Interruptor de Notificación y Hora -->
@@ -106,6 +128,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
                     android:orientation="vertical"
                     android:padding="14dp">
 
@@ -115,6 +138,7 @@
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:text="Activar notificación de repaso"
+                        android:textColor="#000000"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 

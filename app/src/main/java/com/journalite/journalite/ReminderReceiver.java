@@ -29,7 +29,6 @@ public class ReminderReceiver extends BroadcastReceiver {
 
         createReminderChannel(context);
 
-        // Tapping the notification opens the app
         Intent openIntent = new Intent(context, MainActivity.class);
         openIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(

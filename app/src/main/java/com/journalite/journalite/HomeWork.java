@@ -2,15 +2,15 @@
 package com.journalite.journalite;
 
 public class HomeWork {
-    int idHomeWork;
-    String title;
-    String subject;
-    String description;
-    String reviewDate;
-    boolean notifications;
-    String status;
-    String photoPath;
-    String photoDate;
+    private final int idHomeWork;
+    private final String title;
+    private final String subject;
+    private final String description;
+    private final String reviewDate;
+    private final boolean notifications;
+    private final String status;
+    private final String photoPath;
+    private final String photoDate;
     public static final String STATUS_PENDING = "PENDING";
     public static final String STATUS_COMPLETED = "COMPLETED";
 

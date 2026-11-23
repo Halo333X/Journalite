@@ -5,6 +5,7 @@
     <string name="status_completed">Completado</string>
     <string name="error_title_required">Escribe el título de la tarea</string>
     <string name="error_subject_required">Selecciona o escribe una materia</string>
+    <string name="error_description_optional">Describe tu tarea (Opcional)</string>
     <string name="error_past_time">Elige una fecha y hora futuras para el recordatorio</string>
     <string name="homework_saved">Meta guardada correctamente</string>
     <string name="error_saving">Error al guardar en la base de datos</string>
@@ -15,4 +16,10 @@
     <string name="reminder_big_text">Es hora de repasar: %1$s. Toma foto de tu evidencia al terminar.</string>
     <string name="reminder_channel_name">Recordatorios Journalite</string>
     <string name="reminder_channel_description">Notificaciones para repasar apuntes y metas</string>
+
+
+    <!--  Hints  -->
+    <string name="title_hint">Título de la tarea o repaso *</string>
+    <string name="subject_hint">Selecciona o escribe tu materia *</string>
+    <string name="description_hint">Descripción breve (temas, páginas, ejercicios)</string>
 </resources>
