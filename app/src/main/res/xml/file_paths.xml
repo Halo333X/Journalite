@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Evidence photos live in the app internal storage: files/evidence/ -->
+    <files-path
+        name="evidence"
+        path="evidence/" />
+</paths>

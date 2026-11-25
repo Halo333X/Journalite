@@ -4,7 +4,7 @@
     android:id="@+id/mainAgregar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EFEFEF"
+    android:background="#000000"
     android:orientation="vertical">
 
     <!-- Barra Superior con tono original #265C63 -->
@@ -15,12 +15,15 @@
         android:background="#265C63"
         app:navigationIcon="@android:drawable/ic_menu_revert"
         app:navigationIconTint="@color/white"
-        app:title="Nueva meta autodidacta"
+        app:title="@string/screen_two_header_title"
         app:titleTextColor="@color/white" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/scrollAgregar"
+        android:background="#EFEFEF"
+        android:clipToPadding="false"
         android:fillViewport="true">
 
         <LinearLayout
@@ -94,7 +97,7 @@
                     android:hint="Elija o escriba una materia"
                     android:inputType="textCapWords"
                     android:maxLines="1"
-                    android:popupBackground="#FFFFFF"
+                    android:popupBackground="@color/material_dynamic_neutral50"
                     android:textColor="#222222"
                     android:textColorHint="#888888" />
             </com.google.android.material.textfield.TextInputLayout>

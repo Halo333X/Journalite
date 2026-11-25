@@ -1,12 +1,8 @@
 package com.journalite.journalite;
 
 import android.Manifest;
-import android.app.AlarmManager;
 import android.app.DatePickerDialog;
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -58,13 +54,6 @@ public class AddHomeWorkActivity extends AppCompatActivity {
         WindowCompat.enableEdgeToEdge(getWindow());
         setContentView(R.layout.activity_agregar_tarea);
 
-        // Evita que la barra superior choque con la hora y batería del teléfono
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.mainAgregar), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
         dbHelper = new AdminSQLiteOpenHelper(this);
         selectedCalendar = Calendar.getInstance();
         selectedCalendar.set(Calendar.HOUR_OF_DAY, 10);
@@ -72,10 +61,25 @@ public class AddHomeWorkActivity extends AppCompatActivity {
         selectedCalendar.set(Calendar.SECOND, 0);
 
         bindViews();
+        setupWindowInsets();
         setupSubjectSuggestions();
         setupDateTimePickers();
 
         btnSaveHomeWork.setOnClickListener(v -> saveHomeWork());
+    }
+
+    private void setupWindowInsets() {
+        View root = findViewById(R.id.mainAgregar);
+        View scroll = findViewById(R.id.scrollAgregar);
+
+        ViewCompat.setOnApplyWindowInsetsListener(root, (v, insets) -> {
+            Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            Insets barsAndKeyboard = insets.getInsets(
+                    WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime());
+            v.setPadding(bars.left, bars.top, bars.right, 0);
+            scroll.setPadding(0, 0, 0, barsAndKeyboard.bottom);
+            return insets;
+        });
     }
 
     private void bindViews() {
@@ -93,7 +97,6 @@ public class AddHomeWorkActivity extends AppCompatActivity {
 
         updateTimeText();
 
-        // Al activar el switch muestra el selector de hora y pide permiso si es Android 13+
         switchReminder.setOnCheckedChangeListener((buttonView, isChecked) -> {
             layoutReminderTime.setVisibility(isChecked ? View.VISIBLE : View.GONE);
             if (isChecked) {
@@ -185,7 +188,7 @@ public class AddHomeWorkActivity extends AppCompatActivity {
             return;
         }
         if (!dateSelected) {
-            Toast.makeText(this, "Seleccione una fecha para la tarea", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.error_date_required, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -223,32 +226,7 @@ public class AddHomeWorkActivity extends AppCompatActivity {
     }
 
     private void scheduleReminder(int homeWorkId, String title, String subject) {
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        if (alarmManager == null) return;
-
-        Intent intent = new Intent(this, ReminderReceiver.class);
-        intent.putExtra(Constants.EXTRA_HOMEWORK_ID, homeWorkId);
-        intent.putExtra(Constants.EXTRA_TITLE, title);
-        intent.putExtra(Constants.EXTRA_SUBJECT, subject);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                this,
-                homeWorkId,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
-        );
-
-        long alarmTime = selectedCalendar.getTimeInMillis();
-
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !alarmManager.canScheduleExactAlarms()) {
-                alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
-            } else {
-                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
-            }
-        } catch (SecurityException e) {
-            alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent);
-        }
+        ReminderScheduler.schedule(this, homeWorkId, title, subject, selectedCalendar.getTimeInMillis());
     }
 
     private void requestNotificationPermissionIfNeeded() {

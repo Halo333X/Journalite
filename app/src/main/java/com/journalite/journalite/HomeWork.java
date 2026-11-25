@@ -68,6 +68,10 @@ public class HomeWork {
         return this.photoDate;
     }
 
+    public boolean isCompleted() {
+        return STATUS_COMPLETED.equals(this.status);
+    }
+
     public int getHomeWorkId() {
         return this.idHomeWork;
     }

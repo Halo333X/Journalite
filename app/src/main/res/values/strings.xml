@@ -2,10 +2,12 @@
     <string name="app_name">Journalite</string>
     <string name="status_pending">Pending</string>
     <string name="status_completed">Completed</string>
+    <string name="screen_two_header_title">New self-taught goal</string>
     <string name="error_title_required">Enter the task title</string>
     <string name="error_subject_required">Select or type a subject</string>
     <string name="error_description_optional">Describe your task (Optional)</string>
     <string name="error_past_time">Pick a future date and time for the reminder</string>
+    <string name="error_date_required">Select a date for the task</string>
     <string name="homework_saved">Goal saved</string>
     <string name="error_saving">Error saving to the database</string>
     <string name="reminder_default_title">Pending review</string>
@@ -16,6 +18,29 @@
     <string name="reminder_channel_name">Journalite reminders</string>
     <string name="reminder_channel_description">Notifications to review notes and goals</string>
 
+
+    <!--  Screen 3: task detail and evidence  -->
+    <string name="detail_title">Task detail</string>
+    <string name="detail_target_date">Target date: %1$s</string>
+    <string name="detail_description_label">Description</string>
+    <string name="detail_no_description">No description</string>
+    <string name="detail_evidence_label">Evidence</string>
+    <string name="evidence_take_photo">Take evidence photo to complete</string>
+    <string name="evidence_hint">This task can only be completed with a photo.</string>
+    <string name="evidence_registered_on">Evidence registered on: %1$s</string>
+    <string name="evidence_resolution">Resolution: %1$s</string>
+    <string name="evidence_saved">Evidence saved</string>
+    <string name="photo_unavailable">Photo not available</string>
+    <string name="delete_homework">Delete task</string>
+    <string name="delete_title">Delete task?</string>
+    <string name="delete_message">The task and its evidence photo will be removed. This cannot be undone.</string>
+    <string name="delete_confirm">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="homework_deleted">Task deleted</string>
+    <string name="error_homework_not_found">Task not found</string>
+    <string name="error_camera_unavailable">No camera app available</string>
+    <string name="error_photo_failed">Could not save the photo</string>
+    <string name="error_deleting">Could not delete the task</string>
 
     <!--  Hints  -->
     <string name="title_hint">Task or study session title *</string>

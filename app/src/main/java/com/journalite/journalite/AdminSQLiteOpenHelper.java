@@ -28,8 +28,8 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
                 "photo_path TEXT, " +
                 "photo_date TEXT" +
                 ")");
-        db.execSQL("CREATE INDEX idx_homeworks_subject ON HomeWorks(subject)");
-        db.execSQL("CREATE INDEX idx_homeworks_status ON HomeWorks(status)");
+        db.execSQL("CREATE INDEX idx_homeworks_subject ON homeworks(subject)");
+        db.execSQL("CREATE INDEX idx_homeworks_status ON homeworks(status)");
     }
 
     @Override
@@ -48,7 +48,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put("has_notifications", homeWork.hasNotifications() ? 1 : 0);
         values.put("status", HomeWork.STATUS_PENDING);
 
-        long id = db.insert("HomeWorks", null, values);
+        long id = db.insert("homeworks", null, values);
         return id;
     }
 
